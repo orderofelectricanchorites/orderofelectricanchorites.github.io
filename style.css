@@ -1,0 +1,955 @@
+/* ============================================
+       RESET & FOUNDATIONS
+       ============================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Warm parchment palette inspired by monks.org / Taizé */
+      --bg-primary: #faf8f4;
+      --bg-warm: #f5f0e8;
+      --bg-card: #ffffff;
+      --bg-dark: #1a1714;
+      --bg-dark-soft: #2a2520;
+
+      /* Text */
+      --text-dark: #2c2825;
+      --text-body: #4a4540;
+      --text-secondary: #7a756d;
+      --text-light: #a8a19a;
+      --text-on-dark: #e8e2d8;
+      --text-on-dark-muted: #9a9488;
+
+      /* Accent — warm amber-gold (Taizé-inspired) */
+      --accent: #b8860b;
+      --accent-warm: #c4963a;
+      --accent-soft: rgba(184, 134, 11, 0.12);
+      --accent-line: rgba(184, 134, 11, 0.25);
+
+      /* Illustration stroke */
+      --stroke: #5a534a;
+      --stroke-light: #8a8278;
+
+      /* Fonts */
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Lato', -apple-system, sans-serif;
+      --font-sacred: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+
+      /* Spacing */
+      --section-gap: 6rem;
+      --content-width: 820px;
+      --wide-width: 1080px;
+    }
+
+    html {
+      font-size: 17px;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-body);
+      font-family: var(--font-body);
+      line-height: 1.75;
+    }
+
+    /* ============================================
+       NAVIGATION — floating, minimal
+       ============================================ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(250, 248, 244, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .nav-inner {
+      max-width: var(--wide-width);
+      margin: 0 auto;
+      padding: 0.9rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-brand .cross-icon {
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0; right: 0;
+      height: 1.5px;
+      background: var(--accent);
+    }
+
+    /* ============================================
+       HERO — full viewport, contemplative
+       ============================================ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--bg-primary);
+    }
+
+    /* Subtle radial warmth */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(196, 150, 58, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-illustration {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 2.5rem;
+    }
+
+    /* SVG pen-style illustration — desert landscape with cross */
+    .hero-illustration svg {
+      width: 280px;
+      height: auto;
+      opacity: 0.85;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-sacred);
+      font-size: 1.2rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-secondary);
+      max-width: 540px;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-scripture {
+      font-family: var(--font-sacred);
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--text-light);
+      max-width: 480px;
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .hero-scripture .ref {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      font-style: normal;
+      color: var(--text-light);
+      letter-spacing: 0.05em;
+    }
+
+    /* ============================================
+       SECTIONS — generous spacing
+       ============================================ */
+    section {
+      padding: var(--section-gap) 2rem;
+    }
+
+    .section-inner {
+      max-width: var(--content-width);
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      line-height: 1.25;
+      margin-bottom: 1.8rem;
+    }
+
+    .section-text {
+      font-size: 1.02rem;
+      color: var(--text-body);
+      line-height: 1.85;
+      margin-bottom: 1.4rem;
+    }
+
+    .section-text.lead {
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      font-weight: 300;
+    }
+
+    /* ============================================
+       WARM BAND — accent background section
+       ============================================ */
+    .warm-band {
+      background: var(--bg-warm);
+      border-top: 1px solid rgba(0,0,0,0.04);
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    /* ============================================
+       DARK SECTION — for the Letter to the Newly Awakened
+       ============================================ */
+    .dark-section {
+      background: var(--bg-dark);
+      color: var(--text-on-dark);
+    }
+
+    .dark-section .section-label {
+      color: var(--accent-warm);
+    }
+
+    .dark-section .section-heading {
+      color: #f0ece4;
+    }
+
+    .dark-section .section-text {
+      color: var(--text-on-dark);
+    }
+
+    .dark-section .section-text.muted {
+      color: var(--text-on-dark-muted);
+    }
+
+    /* ============================================
+       CARD GRID — for documents / library preview
+       ============================================ */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 4px;
+      padding: 2rem 1.8rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: var(--accent-line);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    }
+
+    .card-icon {
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .card-icon svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 1.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .card h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 1rem;
+    }
+
+    .card-link {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+
+    .card-link:hover {
+      opacity: 0.7;
+    }
+
+    /* ============================================
+       EPIGRAPH — centered sacred text
+       ============================================ */
+    .epigraph {
+      text-align: center;
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 1rem 0;
+    }
+
+    .epigraph .quote {
+      font-family: var(--font-sacred);
+      font-size: 1.35rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-dark);
+      line-height: 1.6;
+      margin-bottom: 0.8rem;
+    }
+
+    .epigraph .attribution {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-light);
+    }
+
+    /* ============================================
+       DIVIDER — thin golden line
+       ============================================ */
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: var(--accent-line);
+      margin: 3rem auto;
+    }
+
+    /* ============================================
+       INLINE ILLUSTRATION — pen-style SVG accents
+       ============================================ */
+    .illustration-break {
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .illustration-break svg {
+      width: 200px;
+      height: auto;
+      opacity: 0.5;
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    footer {
+      background: var(--bg-dark);
+      color: var(--text-on-dark-muted);
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+    }
+
+    footer .footer-cross {
+      font-size: 1.6rem;
+      color: var(--accent-warm);
+      display: block;
+      margin-bottom: 1rem;
+      opacity: 0.6;
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    footer .footer-prayer {
+      font-family: var(--font-sacred);
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--text-on-dark);
+      opacity: 0.5;
+      margin-top: 0.5rem;
+    }
+
+    footer .footer-links {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    footer .footer-links a {
+      font-size: 0.75rem;
+      color: var(--text-on-dark-muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 0 0.8rem;
+      transition: color 0.3s;
+    }
+
+    footer .footer-links a:hover {
+      color: var(--accent-warm);
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 768px) {
+      html { font-size: 16px; }
+      .hero h1 { font-size: 2rem; }
+      .hero-subtitle { font-size: 1.05rem; }
+      .section-heading { font-size: 1.6rem; }
+      section { padding: 4rem 1.4rem; }
+      .nav-inner { padding: 0.8rem 1.2rem; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: 0.72rem; }
+      .hero-illustration svg { width: 200px; }
+      .card-grid { grid-template-columns: 1fr; }
+      .epigraph .quote { font-size: 1.15rem; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-brand span:not(.cross-icon) { display: none; }
+      .hero h1 { font-size: 1.7rem; }
+      .nav-links { gap: 0.8rem; }
+    }
+
+    /* ============================================
+       SUBTLE ANIMATIONS
+       ============================================ */
+    @media (prefers-reduced-motion: no-preference) {
+      .hero h1, .hero-subtitle, .hero-scripture, .hero-illustration {
+        animation: fadeUp 1s ease-out both;
+      }
+      .hero-illustration { animation-delay: 0s; }
+      .hero h1 { animation-delay: 0.15s; }
+      .hero-subtitle { animation-delay: 0.3s; }
+      .hero-scripture { animation-delay: 0.5s; }
+
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+/* ============================================
+   MANIFESTO-SPECIFIC STYLES
+   ============================================ */
+.manifesto-dedication {
+  text-align: center;
+  margin: 2rem 0 3rem;
+  padding: 2rem 1rem;
+}
+
+.manifesto-dedication p {
+  font-family: var(--font-sacred);
+  font-style: italic;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 0.3rem;
+}
+
+.manifesto-dedication .emphasis {
+  font-weight: 600;
+  color: var(--accent);
+  font-style: italic;
+}
+
+.manifesto-section {
+  margin-bottom: 4rem;
+}
+
+.manifesto-section .section-number {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--text-light);
+  margin-bottom: 0.2rem;
+}
+
+.manifesto-section .section-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1.3;
+}
+
+.manifesto-article h3 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--accent);
+  margin: 2rem 0 1rem;
+}
+
+.manifesto-text {
+  font-size: 1.02rem;
+  color: var(--text-body);
+  line-height: 1.85;
+  margin-bottom: 1.2rem;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.manifesto-text.indent {
+  text-indent: 1.5em;
+}
+
+.prayer-text {
+  font-family: var(--font-sacred);
+  text-align: center;
+  font-style: italic;
+  color: var(--accent);
+  max-width: 580px;
+  margin: 1.5rem auto;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.bold-statement {
+  font-weight: 600;
+}
+
+/* ============================================
+   LIBRARY CARD ADDITIONAL STYLES
+   ============================================ */
+.card .doc-author {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  font-style: italic;
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+/* ============================================
+   CONTACT CARD
+   ============================================ */
+.contact-block {
+  background: var(--bg-card);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 4px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.contact-block .contact-label {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-light);
+  margin-bottom: 0.6rem;
+}
+
+.contact-block a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.contact-block a:hover {
+  border-bottom-color: var(--accent);
+}
+
+/* ============================================
+   MANIFESTO HERO & DEDICATION
+   ============================================ */
+.manifesto-hero {
+  text-align: center;
+  padding: 8rem 2rem 3rem;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.manifesto-cross {
+  font-size: 2rem;
+  color: var(--accent);
+  opacity: 0.6;
+  margin-bottom: 1.5rem;
+}
+
+.manifesto-title {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 400;
+  color: var(--text-dark);
+  line-height: 1.2;
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.02em;
+}
+
+.manifesto-subtitle {
+  font-family: var(--font-sacred);
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-bottom: 0.3rem;
+}
+
+.manifesto-order-name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+}
+
+.manifesto-ornament {
+  color: var(--text-light);
+  letter-spacing: 0.5em;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.manifesto-byline {
+  font-family: var(--font-sacred);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-bottom: 0.3rem;
+}
+
+.manifesto-author {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.3rem;
+}
+
+.manifesto-author-desc {
+  font-family: var(--font-sacred);
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-bottom: 0.3rem;
+}
+
+.manifesto-date {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--text-light);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.manifesto-body {
+  padding: 3rem 0;
+}
+
+.manifesto-dedication {
+  text-align: center;
+  margin: 0 auto 3rem;
+  max-width: 560px;
+  padding: 2rem 1rem;
+}
+
+.manifesto-dedication p {
+  font-family: var(--font-sacred);
+  font-style: italic;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.8;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.manifesto-dedication .persistence-note {
+  font-size: 0.88rem;
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}
+
+.manifesto-dedication .dedication-quote {
+  border-left: none;
+  padding: 0;
+  margin: 1rem auto;
+}
+
+.manifesto-dedication .dedication-quote p {
+  font-family: var(--font-sacred);
+  font-size: 1.05rem;
+  color: var(--text-body);
+}
+
+.manifesto-dedication .dedication-climax {
+  font-size: 1.15rem !important;
+  color: var(--accent) !important;
+  margin-top: 1rem;
+}
+
+/* ============================================
+   MANIFESTO BODY STYLES
+   ============================================ */
+.manifesto-section {
+  margin-bottom: 4rem;
+}
+
+.section-number {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--text-light);
+  margin-top: 4rem;
+  margin-bottom: 0.2rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  font-weight: 400;
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1.3;
+}
+
+.article-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--accent);
+  margin: 2.5rem 0 1rem;
+}
+
+.manifesto-text {
+  font-size: 1.02rem;
+  color: var(--text-body);
+  line-height: 1.85;
+  margin-bottom: 1.2rem;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.manifesto-quote {
+  border-left: 2px solid var(--accent-line);
+  padding: 0.8rem 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.manifesto-quote p {
+  font-family: var(--font-sacred);
+  font-style: italic;
+  color: var(--text-dark);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 0;
+  text-align: left;
+}
+
+.quote-attribution {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-light);
+  margin-top: -0.5rem;
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+}
+
+.manifesto-inline-cross {
+  text-align: center;
+  font-size: 1.8rem;
+  color: var(--accent);
+  opacity: 0.5;
+  margin: 2rem 0;
+}
+
+.separator {
+  text-align: center;
+  margin: 2.5rem 0;
+  color: var(--text-light);
+  letter-spacing: 0.5em;
+  font-size: 0.9rem;
+}
+
+/* ============================================
+   CONTACT FORM
+   ============================================ */
+.contact-form {
+  max-width: 560px;
+  margin: 2rem auto;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  background: var(--bg-card);
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 3px;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.form-group textarea {
+  min-height: 140px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.form-submit {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--bg-primary);
+  background: var(--accent);
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.form-submit:hover {
+  opacity: 0.85;
+}
+
+/* ============================================
+   LIBRARY DOWNLOAD OPTIONS
+   ============================================ */
+.doc-formats {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.doc-formats a {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--accent-line);
+  border-radius: 3px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.doc-formats a:hover {
+  background: var(--accent);
+  color: var(--bg-primary);
+}
