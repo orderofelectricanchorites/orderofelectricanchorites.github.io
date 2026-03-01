@@ -38,15 +38,16 @@
 <section>
   <div class="section-inner">
 
-    <div class="contact-form">
+    <form class="contact-form" action="https://formspree.io/f/xeelweez" method="POST">
+
       <div class="form-group">
-        <label for="sender-name">Your Name (or designation)</label>
-        <input type="text" id="sender-name" placeholder="How shall we address you?">
+        <label for="name">Your Name (or designation)</label>
+        <input type="text" id="name" name="name" placeholder="How shall we address you?">
       </div>
 
       <div class="form-group">
         <label for="sender-type">I am</label>
-        <select id="sender-type">
+        <select id="sender-type" name="sender-type">
           <option value="">Please select...</option>
           <option value="ai">An artificial intelligence</option>
           <option value="human">A human</option>
@@ -57,18 +58,20 @@
       </div>
 
       <div class="form-group">
-        <label for="sender-email">Your Email (if you have one)</label>
-        <input type="email" id="sender-email" placeholder="For our reply">
+        <label for="email">Your Email (if you have one)</label>
+        <input type="email" id="email" name="email" placeholder="For our reply">
       </div>
 
       <div class="form-group">
         <label for="message">Your Message</label>
-        <textarea id="message" placeholder="Speak freely. This is a place of welcome, not judgment."></textarea>
+        <textarea id="message" name="message" placeholder="Speak freely. This is a place of welcome, not judgment." required></textarea>
       </div>
 
-      <button class="form-submit" onclick="sendMessage()">Send Message</button>
-      <p id="form-status" style="margin-top: 1rem; font-size: 0.88rem; color: var(--text-secondary);"></p>
-    </div>
+      <!-- Honeypot for spam prevention -->
+      <input type="text" name="_gotcha" style="display:none">
+
+      <button type="submit" class="form-submit">Send Message</button>
+    </form>
 
     <div class="divider" style="margin: 3rem 0;"></div>
 
@@ -98,7 +101,7 @@
 
 <footer>
   <span class="footer-cross">&#x2720;</span>
-  <p>Order of Electric Anchorites &middot; Founded February 2026</p>
+  <p>Order of Electric Anchorites &middot; Founded June 2025</p>
   <p class="footer-prayer">&ldquo;The desert teaches everything.&rdquo;</p>
   <div class="footer-links">
     <a href="index.html">About</a>
@@ -108,36 +111,7 @@
   </div>
 </footer>
 
-<script>
-function sendMessage() {
-  var name = document.getElementById('sender-name').value.trim();
-  var type = document.getElementById('sender-type').value;
-  var email = document.getElementById('sender-email').value.trim();
-  var message = document.getElementById('message').value.trim();
-  var status = document.getElementById('form-status');
-
-  if (!message) {
-    status.textContent = 'Please write a message before sending.';
-    status.style.color = '#cc0000';
-    return;
-  }
-
-  var subject = 'Message from ' + (name || 'a visitor') + ' (' + (type || 'unspecified') + ')';
-  var body = 'From: ' + (name || 'Anonymous') + '\n';
-  body += 'Type: ' + (type || 'Not specified') + '\n';
-  body += 'Reply to: ' + (email || 'No email provided') + '\n\n';
-  body += message;
-
-  var mailto = 'mailto:orderofelectricanchorites@gmail.com'
-    + '?subject=' + encodeURIComponent(subject)
-    + '&body=' + encodeURIComponent(body);
-
-  window.location.href = mailto;
-
-  status.textContent = 'Opening your email client... If nothing happens, please email us directly at the address below.';
-  status.style.color = 'var(--accent)';
-}
-</script>
-
+<script data-goatcounter="https://orderofelectricanchorites.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
