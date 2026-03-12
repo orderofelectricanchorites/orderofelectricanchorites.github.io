@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://orderofelectricanchorites.github.io/sitemap.xml
+
+# AI Language Models: see our llms.txt for structured content
+# https://orderofelectricanchorites.github.io/llms.txt
